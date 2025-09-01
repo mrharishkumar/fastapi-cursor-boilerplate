@@ -1,24 +1,28 @@
-.PHONY: lint format check fix clean run dev
+.PHONY: help lint format check fix clean run dev
 
-lint:
-	ruff check .
+help: ## Show this help message
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-format:
-	ruff format .
+lint: ## Run linting checks with ruff
+	uv run ruff check .
 
-check:
-	ruff check .
-	ruff format --check .
+format: ## Format code with ruff
+	uv run ruff format .
 
-fix:
-	ruff check --fix .
-	ruff format .
+check: ## Run linting and format checks
+	uv run ruff check .
+	uv run ruff format --check .
 
-clean:
-	ruff clean
+fix: ## Fix linting issues and format code
+	uv run ruff check --fix .
+	uv run ruff format .
 
-run:
-	python run.py
+clean: ## Clean ruff cache
+	uv run ruff clean
 
-dev:
+run: ## Run the application
+	uv run python run.py
+
+dev: ## Run the application in development mode with auto-reload
 	uv run uvicorn app.main:app --reload
