@@ -3,14 +3,16 @@ name = "fastapi-cursor-boilerplate"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16.5",
     "fastapi[standard]>=0.116.1",
     "httpx>=0.28.1",
     "loguru>=0.7.3",
     "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
     "pyodbc>=5.2.0",
+    "python-dotenv>=1.1.1",
     "sqlalchemy>=2.0.43",
 ]
 
@@ -27,7 +29,7 @@ dev = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.ruff]
+[tool.ruff.lint]
 select = ["E", "F", "I", "W", "B", "C4", "UP", "N", "ARG", "SIM", "TCH", "TID", "Q", "RSE", "RET", "SLF", "SLOT", "PIE", "TRY", "NPY", "AIR", "PERF", "FURB", "LOG", "PTH", "ERA", "PD", "PGH", "PL", "RUF"]
 ignore = [
     "B008",  # do not perform function calls in argument defaults
@@ -40,6 +42,7 @@ ignore = [
 fixable = ["ALL"]
 unfixable = []
 
+[tool.ruff]
 exclude = [
     ".bzr",
     ".direnv",
@@ -67,7 +70,7 @@ exclude = [
 line-length = 80
 indent-width = 4
 
-target-version = "py313"
+target-version = "py312"
 
 [tool.ruff.format]
 quote-style = "double"
