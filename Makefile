@@ -21,4 +21,4 @@ run:
 	python run.py
 
 dev:
-	uv run app:main --reload
+	uv run uvicorn app.main:app --reload
