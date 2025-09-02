@@ -1,4 +1,4 @@
-.PHONY: help lint format check fix clean run dev
+.PHONY: help lint format check fix clean run dev test test-cov
 
 help: ## Show this help message
 	@echo "Available commands:"
@@ -20,6 +20,12 @@ fix: ## Fix linting issues and format code
 
 clean: ## Clean ruff cache
 	uv run ruff clean
+
+test: ## Run test suite
+	uv run pytest tests/ -v
+
+test-cov: ## Run test suite with coverage
+	uv run pytest tests/ --cov=app --cov-report=html --cov-report=term
 
 run: ## Run the application
 	uv run python run.py
