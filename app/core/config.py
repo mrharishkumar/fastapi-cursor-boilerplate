@@ -5,7 +5,7 @@ settings. It handles database configuration, CORS settings, logging
 configuration, and environment variable validation for the application.
 """
 
-from pydantic import AnyHttpUrl, field_validator
+from pydantic import AnyHttpUrl, ConfigDict, field_validator
 from pydantic_settings import BaseSettings
 
 
@@ -147,9 +147,7 @@ class Settings(BaseSettings):
 
         return ";".join(security_params)
 
-    class Config:
-        case_sensitive = True
-        env_file = ".env"
+    model_config = ConfigDict(case_sensitive=True, env_file=".env")
 
 
 settings = Settings()
