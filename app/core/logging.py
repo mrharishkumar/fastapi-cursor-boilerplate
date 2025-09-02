@@ -10,6 +10,8 @@ from pathlib import Path
 
 from loguru import logger
 
+from app.core.config import settings
+
 
 def setup_logging() -> None:
     """Configure project-wide logging with loguru.
@@ -29,7 +31,7 @@ def setup_logging() -> None:
             "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | "
             "<level>{message}</level>"
         ),
-        level="INFO",
+        level=settings.LOG_LEVEL,
         colorize=True,
         backtrace=True,
         diagnose=True,
@@ -44,7 +46,7 @@ def setup_logging() -> None:
             "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | "
             "{name}:{function}:{line} | {message}"
         ),
-        level="DEBUG",
+        level=settings.LOG_LEVEL,
         rotation="10 MB",
         retention="30 days",
         compression="zip",
