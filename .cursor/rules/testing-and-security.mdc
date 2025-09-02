@@ -1,0 +1,19 @@
+---
+description: **Testing and Security Guidelines for FastAPI Applications Including Unit Testing, Environment Variable Management, and Authentication Security**
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# Testing and Security
+
+## 1. **Unit and Integration Tests**
+- Write tests for all endpoints and business logic. Aim for **high test coverage**. Use the `TestClient` provided by FastAPI for testing routes.
+- Place tests in the `tests/` directory.
+- **Mirror the app structure** in tests.
+- Use **descriptive test names** and proper assertions.
+
+## 2. **Environment Variables**
+- All sensitive information (database credentials, secret keys) must be stored in **environment variables**, not hardcoded in the source code. Use `python-dotenv`.
+
+## 3. **Security**
+- Use FastAPI's built-in security features, such as `OAuth2PasswordBearer` for **token-based authentication**. Do not implement custom, insecure authentication methods.
