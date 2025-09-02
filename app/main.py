@@ -3,11 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.api import api_router
 from app.core.config import settings
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="FastAPI Cursor Boilerplate",
+    description=settings.DESCRIPTION,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
 
@@ -22,7 +25,4 @@ if settings.BACKEND_CORS_ORIGINS:
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-
-@app.get("/health")
-async def health_check() -> dict[str, str]:
-    return {"status": "healthy"}
+logger.info("FastAPI application initialized successfully")
