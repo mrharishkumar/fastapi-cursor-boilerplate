@@ -155,31 +155,12 @@ async def get_async_db() -> AsyncGenerator[Session, None]:
         session.close()
 
 
-def test_connection() -> bool:
-    """
-    Test the database connection.
-
-    Returns:
-        bool: True if connection is successful, False otherwise
-    """
-    try:
-        engine = get_engine()
-        with engine.connect() as connection:
-            result = connection.execute(text("SELECT 1 as test_value"))
-            result.fetchone()
-            logger.info("Database connection test successful")
-            return True
-    except Exception:
-        logger.exception("Database connection test failed")
-        return False
-
-
 def get_connection_info() -> dict[str, str]:
     """
     Get database connection status information for health monitoring.
 
     Returns:
-        dict: Safe connection status information.
+        dict[str, str]: Connection status information.
     """
     try:
         engine = get_engine()

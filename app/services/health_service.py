@@ -6,7 +6,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.core.logging import get_logger
-from app.db import get_connection_info, test_connection
+from app.db import get_connection_info
 
 
 class HealthCheckError(Exception):
@@ -52,7 +52,9 @@ class HealthService:
         """
         logger.info("Health check requested")
 
-        is_connected = test_connection()
+        connection_info = get_connection_info()
+
+        is_connected = connection_info["status"] == "connected"
 
         if not is_connected:
             logger.error("Database connection test failed")
@@ -70,8 +72,6 @@ class HealthService:
             query_successful = False
             query_error_msg = str(query_error)
             logger.exception("Database query test failed")
-
-        connection_info = get_connection_info()
 
         overall_healthy = is_connected and query_successful
 
@@ -96,10 +96,10 @@ class HealthService:
             logger.error(
                 "Health check failed", extra={"health_status": health_status}
             )
-            raise HealthCheckError
-
-        logger.info(
-            "Health check successful", extra={"health_status": health_status}
-        )
+        else:
+            logger.info(
+                "Health check successful",
+                extra={"health_status": health_status},
+            )
 
         return health_status
