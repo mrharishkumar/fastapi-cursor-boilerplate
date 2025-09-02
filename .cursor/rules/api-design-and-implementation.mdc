@@ -1,0 +1,38 @@
+---
+description: **API Design and Implementation Rules for FastAPI Endpoints**
+globs: ["**/api/**/*.py", "**/schemas/**/*.py", "**/main.py"]
+alwaysApply: true
+---
+
+# API Design and Implementation
+
+## 1. **Pydantic Validation**
+- Use Pydantic models for all incoming request bodies and outgoing responses. This ensures **automatic data validation** and clear API contracts.
+- Use `response_model` to define the schema for **successful responses**.
+- Use separate Pydantic schemas for creating, updating, and reading resources (e.g., **UserCreate**, **UserUpdate**, **UserRead**).
+
+## 2. **Router Structure**
+- Create a single `APIRouter` instance per endpoint file.
+- Use **descriptive prefixes** when including routers in the main API router.
+- Always include proper **HTTP status codes**, response models, and documentation.
+- Use **tags** to group related endpoints in the API documentation.
+- Include **docstrings** for all endpoint functions.
+- Follow **RESTful conventions** for endpoint paths and HTTP methods.
+
+## 3. **API Router Aggregation**
+- Import all endpoint routers in `app/api/v1/api.py`.
+- Use **meaningful prefixes** that match the feature domain.
+- Keep the main API router clean and focused on **aggregation only**.
+- Ensure all routers are properly included with **appropriate prefixes**.
+
+## 4. **Database Configuration and Connection Management**
+- Database configuration is stored in `app/core/config.py` using **Pydantic Settings**.
+- Use database connection and session management from `app/db/__init__.py`.
+- Use SQLAlchemy's `create_engine()` with **connection pooling** for production.
+- Implement proper **session lifecycle management** with dependency injection.
+- Use `get_db()` dependency function for database sessions in endpoints.
+- Use database migrations with **Alembic** for schema changes.
+- Implement proper **error handling** for database connection failures.
+
+## 5. **Logging Standards**
+- Use **module-based naming**: `get_logger(__name__)` for general module logging.
