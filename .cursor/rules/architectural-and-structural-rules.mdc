@@ -1,0 +1,64 @@
+---
+description: Architectural and structural rules
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# Project Architecture & Structure Rules
+
+## Project Structure
+
+### Core Directory Organization
+The project follows a **layered architecture** with clear separation of concerns:
+
+```
+app/
+├── main.py                 # FastAPI application entry point
+├── api/                    # API layer
+│   └── v1/                 # API versioning
+│       ├── api.py          # Main API router aggregation
+│       └── endpoints/      # Individual endpoint modules
+├── core/                   # Core application configuration
+│   └── config.py           # Settings and configuration
+├── db/                     # Database layer
+│   └── __init__.py         # Database connection and session management
+├── models/                 # SQLAlchemy database models
+├── schemas/                # Pydantic data validation schemas
+└── services/               # Business logic layer
+```
+
+## Architectural Principles
+
+### 1. Layered Architecture
+- **API Layer** (`app/api/`): Responsible for handling HTTP requests/responses, routing, and input validation.
+- **Service Layer** (`app/services/`): Contains business logic and orchestration.
+- **Data Layer** (`app/models/`, `app/db/`): Manages database models and data access.
+- **Core Layer** (`app/core/`): Handles configuration, security, and shared utilities.
+
+### 2. Modular Endpoint Organization
+- Each feature/domain should have its own endpoint file in `app/api/v1/endpoints/`.
+- Use descriptive filenames: `users.py`, `products.py`, `auth.py`.
+- Each endpoint file must contain a single `APIRouter` instance.
+
+### 3. Model Organization
+- Place SQLAlchemy models in `app/models/`.
+- Use singular names for model files: `user.py`, `product.py`.
+- Each model should reside in its own file for larger projects.
+
+### 4. Schema Organization
+- Place Pydantic schemas in `app/schemas/`.
+- Use plural names for schema files: `users.py`, `products.py`.
+- Clearly separate request and response schemas.
+
+### 5. Business Logic
+- Business logic should be placed in `app/services/`.
+- Services must be stateless and focused on single responsibilities.
+- Utilize dependency injection for database sessions and other dependencies.
+
+### 6. Service Naming
+- Use descriptive names: `UserService`, `OrderProcessingService`.
+- Include the word "Service" in class names for clarity.
+
+### 7. Configuration Management
+- Employ Pydantic Settings for configuration management.
+- Store all configuration in `app/core/config.py`.
