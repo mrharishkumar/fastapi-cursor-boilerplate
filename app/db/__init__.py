@@ -165,7 +165,7 @@ def test_connection() -> bool:
     try:
         engine = get_engine()
         with engine.connect() as connection:
-            result = connection.execute(text("SELECT 1"))
+            result = connection.execute(text("SELECT 1 as test_value"))
             result.fetchone()
             logger.info("Database connection test successful")
             return True
@@ -186,7 +186,7 @@ def get_connection_info() -> dict[str, str]:
         connection_status = "configured"
 
         with engine.connect() as connection:
-            connection.execute(text("SELECT 1"))
+            connection.execute(text("SELECT 1 as test_value"))
             connection_status = "connected"
 
     except Exception:
