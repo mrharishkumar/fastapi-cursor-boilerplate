@@ -1,6 +1,14 @@
 # FastAPI Cursor Boilerplate
 
-A modern, production-ready FastAPI boilerplate with best practices, code quality tools, and Docker support.
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-green.svg)](https://fastapi.tiangolo.com)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-Supported-orange.svg)](https://microsoft.com/sql-server)
+[![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://docker.com)
+[![UV](https://img.shields.io/badge/UV-Package%20Manager-yellow.svg)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/badge/Ruff-Linter%20%26%20Formatter-red.svg)](https://github.com/astral-sh/ruff)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+A modern, production-ready FastAPI boilerplate with best practices, code quality tools, and Docker support. Perfect for rapid API development with enterprise-grade features and Cursor AI integration.
 
 ## Features
 
