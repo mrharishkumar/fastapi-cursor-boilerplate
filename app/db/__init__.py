@@ -171,6 +171,7 @@ def get_connection_info() -> dict[str, str]:
             connection_status = "connected"
 
     except Exception:
+        logger.exception("Database connection test failed:")
         connection_status = "failed"
 
     return {
