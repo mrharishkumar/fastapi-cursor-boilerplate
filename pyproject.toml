@@ -1,8 +1,9 @@
 [project]
 name = "fastapi-cursor-boilerplate"
 version = "0.1.0"
-description = "Add your description here"
+description = "🚀 Production-ready FastAPI boilerplate with SQL Server, Docker, Cursor AI rules, and modern Python tooling. Perfect for rapid API development with enterprise-grade features."
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16.5",
