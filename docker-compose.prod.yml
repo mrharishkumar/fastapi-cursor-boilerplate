@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        DEV: "false"
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: always

@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        DEV: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./tests:/app/tests
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    restart: unless-stopped
