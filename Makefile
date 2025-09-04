@@ -1,4 +1,6 @@
-.PHONY: help lint format check fix clean run dev test test-cov
+.PHONY: help lint format check fix clean run dev test test-cov \
+	docker-up docker-down docker-logs docker-test docker-test-cov \
+	docker-prod-up docker-prod-down docker-prod-logs
 
 help: ## Show this help message
 	@echo "Available commands:"
@@ -32,3 +34,27 @@ run: ## Run the application
 
 dev: ## Run the application in development mode with auto-reload
 	uv run uvicorn app.main:app --reload
+
+docker-up: ## Start Docker containers for development
+	docker compose up -d
+
+docker-down: ## Stop Docker containers
+	docker compose down
+
+docker-logs: ## View Docker container logs
+	docker compose logs -f
+
+docker-test: ## Run tests in Docker container
+	docker compose exec app uv run pytest tests/ -v
+
+docker-test-cov: ## Run tests with coverage in Docker container
+	docker compose exec app uv run pytest tests/ --cov=app --cov-report=html --cov-report=term
+
+docker-prod-up: ## Build and start Docker containers for production
+	docker compose -f docker-compose.prod.yml up -d --build
+
+docker-prod-down: ## Stop production Docker containers
+	docker compose -f docker-compose.prod.yml down
+
+docker-prod-logs: ## View production Docker container logs
+	docker compose -f docker-compose.prod.yml logs -f
